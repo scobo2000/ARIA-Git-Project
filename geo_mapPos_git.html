@@ -6,6 +6,57 @@
 	<script src="http://code.jquery.com/jquery-1.7.1.js"></script>
 	<script src="http://maps.google.com/maps/api/js?sensor=false"></script>
 	<script src = "ariaMaps.js"></script>
+	
+	<script>
+	$(document).ready(function(){
+	//wire up button click
+		$('#go').click(function(){
+		//test geo-location
+		if (navigator && navigator.geolocation){
+			navigator.geolocation.getCurrentPosition(geo_success, geo_error);
+		} else{
+			error('Geo-location is not supported!')
+		}
+		
+		function geo_error(err){
+		if (err.code == 1){
+			error('The user denied the request for location information')
+		} else if (err.code == 2){
+			error('Your location information is unavailable')
+		} else {
+			error('An unknown error occurred while requesting your location')
+		}
+			
+		}
+		
+		function error(msg) {
+			alert(msg);
+		}
+		
+
+		function geo_success(position) {
+			printLatLong(position.coords.latitude, position.coords.longitude);		
+		}
+		
+		//output latitude and longitude
+		function printLatLong(lat, lng) {
+			alert(lat + "  " + lng);
+			$('lat;).html('<p>Lat:' + lat + '</p>');
+			$('long;).html('<p>Long:' + lng + '</p>');
+		}
+		
+		
+		});
+	
+	});
+		
+	if (navigator.geolocation) {  
+		alert("Geolocation is available.");  
+	} else {  
+	  alert("I'm sorry, but geolocation services are not supported by your browser.");  
+	}
+	</script>
+	
 </head>
 
 <body>
